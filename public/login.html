@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+    <html>
+
+    <head>
+      <meta charset="UTF-8">
+      <title>Login</title>
+      <link rel="icon" href="ico/mainicon.ico">
+      <link rel="stylesheet" href="css/style.css" type="text/css">
+      <!--   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+      Load custom font -->
+    </head>
+
+    <body>
+      <div class="app">
+        <div class="screen join-screen active">
+          <div class="form">
+            <h2>Login</h2>
+            <div class="form-input">
+              <label for="username">Username</label>
+              <input type="text" id="username" placeholder="Enter your username">
+            </div>
+            <div class="form-input">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Enter your password">
+              <span class="password-toggle" onclick="togglePasswordVisibility('password')">Show</span>
+            </div>
+            <div class="form-input">
+              <label class="remember-me">
+                <input type="checkbox" id="rememberMe"> Remember Me
+              </label>
+            </div>
+            <div class="form-input">
+              <button id="login-btn">Login</button>
+            </div>
+            <div class="form-input">
+              <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.getElementById('login-btn').addEventListener('click', function() {
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+          const rememberMe = document.getElementById('rememberMe').checked;
+
+          fetch('/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                username: username,
+                password: password
+              })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.message === 'Login successful!') {
+                alert('Login successful!');
+                if (rememberMe) {
+                  localStorage.setItem('username', username);
+                } else {
+                  localStorage.removeItem('username');
+                }
+                window.location.href = 'dashboard.html';
+              } else {
+                alert(data.message);
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('An error occurred during login.');
+            });
+        });
+
+        function togglePasswordVisibility(inputId) {
+          const input = document.getElementById(inputId);
+          const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+          input.setAttribute('type', type);
+        }
+      </script>
+    </body>
+
+    </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <html>
+
+    <head>
+      <meta charset="UTF-8">
+      <title>Dashboard</title>
+      <link rel="icon" href="ico/mainicon.ico">
+      <link rel="stylesheet" href="css/style.css" type="text/css">
+      <!--   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+      Load custom font -->
+    </head>
+
+    <body>
+      <div class="app">
+        <div class="dashboard-content">
+          <h2>Welcome, <span id="username-display"></span>!</h2>
+
+          <div class="file-sharing-section">
+            <h3>File Sharing</h3>
+            <p>Start sharing files by creating a room or joining an existing one.</p>
+            <button id="create-room-btn">Create Room</button>
+            <button id="join-room-btn">Join Room</button>
+          </div>
+
+          <button id="view-profile-btn">View Profile</button>
+          <button id="logout-btn">Logout</button>
+        </div>
+      </div>
+      <script>
+        // Get the username from localStorage
+        const username = localStorage.getItem('username');
+
+        // Display the username on the dashboard
+        if (username) {
+          document.getElementById('username-display').textContent = username;
+        } else {
+          // Redirect to login if no username is found
+          window.location.href = 'login.html';
+        }
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function() {
+          localStorage.removeItem('username');
+          window.location.href = 'login.html';
+        });
+
+        // Create Room functionality
+        document.getElementById('create-room-btn').addEventListener('click', function() {
+          window.location.href = 'index.html';
+        });
+
+        // Join Room functionality
+        document.getElementById('join-room-btn').addEventListener('click', function() {
+          window.location.href = 'receiver.html';
+        });
+
+        // View Profile functionality
+        document.getElementById('view-profile-btn').addEventListener('click', function() {
+          window.location.href = 'profile.html';
+        });
+      </script>
+    </body>
+
+    </html>

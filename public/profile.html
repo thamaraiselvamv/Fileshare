@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html>
+
+    <head>
+      <meta charset="UTF-8">
+      <title>User Profile</title>
+      <link rel="icon" href="ico/mainicon.ico">
+      <link rel="stylesheet" href="css/style.css" type="text/css">
+      <!--   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+      Load custom font -->
+    </head>
+
+    <body>
+      <div class="app">
+        <div class="profile-content">
+          <h2>User Profile</h2>
+          <div class="profile-info">
+            <p><strong>Username:</strong> <span id="profile-username"></span></p>
+            <p><strong>Registration Date:</strong> <span id="registration-date"></span></p>
+          </div>
+          <button id="back-to-dashboard">Back to Dashboard</button>
+        </div>
+      </div>
+      <script>
+        // Get the username from localStorage
+        const username = localStorage.getItem('username');
+
+        // Display the username on the profile page
+        if (username) {
+          document.getElementById('profile-username').textContent = username;
+        } else {
+          // Redirect to login if no username is found
+          window.location.href = 'login.html';
+        }
+
+        // Back to Dashboard functionality
+        document.getElementById('back-to-dashboard').addEventListener('click', function() {
+          window.location.href = 'dashboard.html';
+        });
+
+        // Get registration date from local storage
+        const registrationDate = localStorage.getItem('registrationDate');
+        if (registrationDate) {
+          document.getElementById('registration-date').textContent = registrationDate;
+        } else {
+          document.getElementById('registration-date').textContent = 'N/A';
+        }
+      </script>
+    </body>
+
+    </html>
